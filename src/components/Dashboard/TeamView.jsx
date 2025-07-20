@@ -110,36 +110,57 @@ export default function TeamView({ team, members, currentUserId }) {
 
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">Team Members ({members.length})</h2>
-          <ul className="space-y-3">
-            {members.map((member) => (
-              <li key={member.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center">
-                  <span className="text-gray-800 font-medium">{member.full_name || "No name set"}</span>
-                  <span className="text-gray-500 text-sm ml-2">({member.roll_number || 'no roll #'})</span>
-                </div>
+          <div className="overflow-x-auto">
+  <table className="table">
+    {/* head */}
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {members.map((member, index) => (
+        <tr key={member.id} className="hover">
+          <th>{index + 1}</th>
+          <td className="font-medium">{member.full_name || "No name set"}</td>
+          <td className="text-gray-500">{member.roll_number || 'No roll #'}</td>
+          <td>
+            {member.id === team.leader_id ? (
+              <span className="badge badge-primary text-xs font-bold">
+                LEADER
+              </span>
+            ) : (
+              <span className="badge badge-ghost text-xs">
+                MEMBER
+              </span>
+            )}
+          </td>
+          <td>
+            {member.id === team.leader_id ? (
+              <span className="text-xs text-gray-400">-</span>
+            ) : member.id === currentUserId ? (
+              // Show "Leave Team" button only to the current user if they are NOT the leader
+              <button
+                onClick={handleLeaveTeam}
+                disabled={loading}
+                className="btn btn-ghost btn-xs text-error hover:bg-error/10 disabled:text-gray-400"
+              >
+                Leave Team
+              </button>
+            ) : (
+              <span className="text-xs text-gray-400">-</span>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
-                {/* --- NEW: Conditional rendering for buttons --- */}
-                <div>
-                  {member.id === team.leader_id ? (
-                    <span className="text-xs font-bold text-white bg-blue-500 px-2 py-1 rounded-full">
-                      LEADER
-                    </span>
-                  ) : member.id === currentUserId ? (
-                    // Show "Leave Team" button only to the current user if they are NOT the leader
-                    <button
-                      onClick={handleLeaveTeam}
-                      disabled={loading}
-                      className="text-xs font-semibold text-red-600 hover:text-red-800 disabled:text-gray-400"
-                    >
-                      Leave Team
-                    </button>
-                  ) : null}
-                </div>
-                {/* --- END NEW --- */}
-
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </div>

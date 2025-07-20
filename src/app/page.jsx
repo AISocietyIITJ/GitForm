@@ -27,10 +27,9 @@ export default async function Home() {
   return (
     <BackgroundGradientAnimation>
       <div className="absolute z-50 inset-0 flex items-center justify-center px-4">
-        {/* Responsive Mac Screen Window */}
+
         <div className="max-w-5xl w-full bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl overflow-hidden border border-white/30 ring-1 ring-white/10">
           
-          {/* Enhanced Title Bar - Responsive */}
           <div className="bg-white/10 backdrop-blur-xl px-6 py-3 flex items-center justify-between border-b border-white/20 sm:px-8 md:px-12 sm:py-4">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-red-500/90 rounded-full hover:bg-red-500 cursor-pointer transition-all duration-200 shadow-sm sm:w-3.5 sm:h-3.5"></div>
@@ -47,11 +46,9 @@ export default async function Home() {
             <div className="w-12 sm:w-16"></div>
           </div>
           
-          {/* Responsive Layout - Adaptive Grid */}
           <div className="bg-white/80 backdrop-blur-xl px-6 py-8 pointer-events-auto sm:px-10 sm:py-12 lg:px-16 lg:py-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               
-              {/* Left Column: Hero Content */}
               <div className="text-center lg:text-left space-y-6 sm:space-y-8">
                 <div className="w-24 h-24 bg-gradient-to-br from-violet-500/20 via-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-3xl mx-auto lg:mx-0 flex items-center justify-center shadow-lg border border-white/30 sm:w-28 sm:h-28">
                   <div className="w-16 h-16 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center sm:w-18 sm:h-18">
@@ -71,7 +68,6 @@ export default async function Home() {
               
               {/* Right Column: Actions & Prize */}
               <div className="space-y-6 sm:space-y-8">
-                {/* Action Buttons */}
                 <div className="flex flex-col gap-3 sm:gap-4">
                   <Link 
                     href="/create-team" 

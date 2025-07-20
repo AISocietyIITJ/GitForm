@@ -131,7 +131,7 @@ const CreateTeamForm = () => {
               className="input input-bordered w-full"
               placeholder=""
               value={fullName}
-              onChange={(e) => setFullName(e.target.value.trim())}
+              onChange={(e) => setFullName(e.target.value)}
               disabled={loading}
             />
           </fieldset>
@@ -143,7 +143,7 @@ const CreateTeamForm = () => {
               className="input input-bordered w-full"
               placeholder=""
               value={rollNumber}
-              onChange={(e) => setRollNumber(e.target.value.toLowerCase().trim())}
+              onChange={(e) => setRollNumber(e.target.value.toLowerCase())}
               disabled={loading}
             />
           </fieldset>
@@ -157,7 +157,7 @@ const CreateTeamForm = () => {
               className="input input-bordered w-full"
               placeholder="Enter team name"
               value={teamName}
-              onChange={(e) => setTeamName(e.target.value.trim())}
+              onChange={(e) => setTeamName(e.target.value)}
               disabled={loading}
             />
           </fieldset>
