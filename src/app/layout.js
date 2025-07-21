@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "RAID X Pathway Hackathon",
-  description: "Hackathon project for RAID X Pathway",
+  title: "RAID X The Product Club",
+  description: "RAID X The Product Club are organizing hackathon sponsored by Pathway.",
 };
 
 export default function RootLayout({ children }) {

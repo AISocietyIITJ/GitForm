@@ -63,7 +63,7 @@ const CreateTeamForm = () => {
         .from("profiles")
         .update({
           full_name: fullName.trim(),
-          roll_number: rollNumber.trim(),
+          roll_number: rollNumber.trim().toUpperCase(),
         })
         .eq("id", user.id);
       
@@ -118,92 +118,123 @@ const CreateTeamForm = () => {
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center bg-white px-4">
-      <div className="w-full max-w-md border border-gray-200 rounded-lg p-6">
-        <h1 className="text-2xl font-semibold text-center mb-2">Create Your Team</h1>
-        <p className="text-center text-gray-600 mb-6">First, let's get your details.</p>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          <fieldset className="space-y-2">
-            <legend className="text-sm font-medium text-gray-700">Your Full Name</legend>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              placeholder=""
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              disabled={loading}
-            />
-          </fieldset>
-          
-          <fieldset className="space-y-2">
-            <legend className="text-sm font-medium text-gray-700">Your Roll Number</legend>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              placeholder=""
-              value={rollNumber}
-              onChange={(e) => setRollNumber(e.target.value.toLowerCase())}
-              disabled={loading}
-            />
-          </fieldset>
+    <div className="w-full max-w-lg lg:max-w-2xl mx-auto">
+      {/* Heading */}
+      <h1 className="text-2xl font-semibold text-center mb-2 text-white">
+        Create Your Team
+      </h1>
+      <p className="text-center text-gray-300 mb-6">
+        First, let’s get your details.
+      </p>
 
-          <div className="border-t my-4"></div>
-
-          <fieldset className="space-y-2">
-            <legend className="text-sm font-medium text-gray-700">What is your team name?</legend>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              placeholder="Enter team name"
-              value={teamName}
-              onChange={(e) => setTeamName(e.target.value)}
-              disabled={loading}
-            />
-          </fieldset>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={starred}
-              onChange={(e) => setStarred(e.target.checked)}
-              className="checkbox"
-              disabled={loading}
-            />
-            <label htmlFor="terms" className="text-sm text-gray-700">
-              I I have starred <Link href="https://github.com/pathwaycom/pathway" className="text-blue-600 underline" target="_blank">Pathway</Link> on GitHub
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="checkbox"
-              disabled={loading}
-            />
-            <label htmlFor="terms" className="text-sm text-gray-700">
-              I agree to the terms and conditions
-            </label>
-          </div>
-
-          {error && <div className="text-red-600 text-sm">{error}</div>}
-
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 rounded-md hover:bg-neutral-800 transition disabled:bg-gray-400"
+      <form onSubmit={handleSubmit} className="space-y-4 px-10">
+        {/* Full Name */}
+        <fieldset className="space-y-1">
+          <legend className="text-sm font-medium text-gray-400">
+            Your Full Name
+          </legend>
+          <input
+            type="text"
+            className="input input-bordered w-full bg-white/5 border-gray-600 text-gray-200 placeholder-gray-400"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
             disabled={loading}
-          >
-            {loading ? "Creating..." : "Create Team"}
-          </button>
-        </form>
-        <Link className="text-blue-600 underline" href="/join-team"> Join Team </Link>
-      </div>
+          />
+        </fieldset>
+
+        {/* Roll Number */}
+        <fieldset className="space-y-1">
+          <legend className="text-sm font-medium text-gray-400">
+            Your Roll Number
+          </legend>
+          <input
+            type="text"
+            className="input input-bordered w-full bg-white/5 border-gray-600 text-gray-200 placeholder-gray-400"
+            value={rollNumber}
+            onChange={(e) =>
+              setRollNumber(e.target.value.toUpperCase())
+            }
+            disabled={loading}
+          />
+        </fieldset>
+
+        <div className="border-t border-gray-700 my-4" />
+
+        {/* Team Name */}
+        <fieldset className="space-y-1">
+          <legend className="text-sm font-medium text-gray-400">
+            What is your team name?
+          </legend>
+          <input
+            type="text"
+            className="input input-bordered w-full bg-white/5 border-gray-600 text-gray-200 placeholder-gray-400"
+            placeholder="Enter team name"
+            value={teamName}
+            onChange={(e) => setTeamName(e.target.value)}
+            disabled={loading}
+          />
+        </fieldset>
+
+        {/* GitHub Star */}
+        <div className="flex items-center space-x-2">
+          <input
+            id="starred"
+            type="checkbox"
+            checked={starred}
+            onChange={(e) => setStarred(e.target.checked)}
+            className="checkbox checkbox-primary"
+            disabled={loading}
+          />
+          <label htmlFor="starred" className="text-sm text-gray-400">
+            I have starred{" "}
+            <Link
+              href="https://github.com/pathwaycom/pathway"
+              target="_blank"
+              className="text-blue-400 underline"
+            >
+              Pathway
+            </Link>{" "}
+            on GitHub
+          </label>
+        </div>
+
+        {/* Terms */}
+        <div className="flex items-center space-x-2">
+          <input
+            id="terms"
+            type="checkbox"
+            checked={agreed}
+            onChange={(e) => setAgreed(e.target.checked)}
+            className="checkbox checkbox-primary"
+            disabled={loading}
+          />
+          <label htmlFor="terms" className="text-sm text-gray-400">
+            I agree to the terms and conditions
+          </label>
+        </div>
+
+        {/* Error */}
+        {error && <div className="text-red-500 text-sm">{error}</div>}
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-900 transition disabled:bg-gray-600"
+          disabled={loading}
+        >
+          {loading ? "Creating..." : "Create Team"}
+        </button>
+      </form>
+
+      <Link
+        href="/join-team"
+        className="text-blue-400 underline mt-6 block text-center"
+      >
+        Join Team
+      </Link>
     </div>
   );
+
 };
 
 export default CreateTeamForm;

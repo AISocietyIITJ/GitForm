@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import CreateTeamForm from "@/components/Dashboard/CreateTeamForm";
+import { HeroHighlight } from "@/components/ui/hero-highlight";
 
 export default async function JoinTeamPage() {
 const supabase = await createClient();
@@ -26,9 +27,17 @@ const supabase = await createClient();
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <Navbar />
-      <CreateTeamForm />
+    <div className="min-h-screen bg-black flex flex-col">
+      <Navbar className="bg-transparent" />
+      
+      <HeroHighlight
+        containerClassName="flex-1 flex items-center justify-center"
+        className="flex flex-col items-center justify-center px-4"
+      >
+        <div className="w-full max-w-2xl lg:max-w-2xl bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl">          
+          <CreateTeamForm />
+        </div>
+      </HeroHighlight>
     </div>
   );
 }
