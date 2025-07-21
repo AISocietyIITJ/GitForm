@@ -14,7 +14,7 @@ const Navbar = async () => {
     <div className="navbar bg-black text-white px-6 py-3">
       {/* Left: Brand */}
       <div className="flex-1">
-        <a className="text-xl normal-case">Raid X Pathway</a>
+        <a className="text-xl normal-case">Raid x The Product Club</a>
       </div>
 
       {/* Right: Avatar with dropdown */}
