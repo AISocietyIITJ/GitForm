@@ -27,7 +27,7 @@ const Navbar = async () => {
         </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] w-52 p-2 bg-white rounded-box text-black "
+            className="menu menu-sm dropdown-content mt-3 z-[1] w-52 p-2 bg-white rounded-box text-black border-2 border-gray-200"
           >
             <li>
               <button onClick={signOut} className="w-full text-left">

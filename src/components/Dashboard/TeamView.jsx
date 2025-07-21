@@ -73,7 +73,7 @@ export default function TeamView({ team, members, currentUserId }) {
   // --- END NEW ---
 
   return (
-    <div className="flex-grow flex items-center justify-center bg-white px-4">
+    <div className="flex-grow flex items-center font-black justify-center bg-white px-4">
       <div className="w-full max-w-2xl border border-gray-200 rounded-lg p-8">
         <div className="flex justify-between items-start">
           <div>
