@@ -7,9 +7,6 @@ const Navbar = async () => {
 
   const { data: { session } } = await supabase.auth.getSession();
 
-  console.log(session);
-
-
   return (
     <div className="navbar bg-black text-white px-6 py-3">
       {/* Left: Brand */}

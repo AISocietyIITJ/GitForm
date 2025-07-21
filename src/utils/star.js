@@ -25,11 +25,9 @@ export default async function checkGitHubStar() {
     });
 
     if (response.status === 204) {
-      console.log("Verification successful: Repository is starred.");
       return true;
     } 
     else if (response.status === 404) {
-      console.log("Verification failed: Repository is not starred.");
       return false;
     } 
     else {

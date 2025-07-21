@@ -22,9 +22,9 @@ const Page = () => {
               />
               <div className="text-purple-400 text-lg font-bold">×</div>
               <img
-                src="/raid.png"
+                src="/product.png"
                 alt="Product Club Logo"
-                className="w-20 h-20 object-contain"
+                className="w-48 aspect-[3/1] object-cover rounded-2xl"
               />
             </div>
             

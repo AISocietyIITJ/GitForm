@@ -13,7 +13,6 @@ const signInWith = provider => async () => {
             redirectTo: auth_callback_url,
         },
     });
-    console.log('signInWithOAuth data:', data);
     if (error) {
         console.error('Error signing in with OAuth:', error);
         throw error;

@@ -45,7 +45,7 @@ export default async function Home() {
           {/* Subheading */}
           <div className="space-y-3">
             <p className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed">
-              <span className="text-white font-semibold">RAID X The Product Club</span>
+              <span className="text-white font-semibold">RAID x The Product Club</span>
               <br />
               <span className="font-medium">Partnership with Pathway - Pioneers of Live AI</span>
             </p>

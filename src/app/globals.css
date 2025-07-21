@@ -5,8 +5,20 @@
 
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+html, html[data-theme="dark"], html.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
 }
 
 @theme inline {

@@ -30,8 +30,8 @@ export default async function DashboardPage() {
     .single();
 
   if (teamError) {
-    console.log('team: null')
-    console.log('Error fetching team details:', teamError)
+    // console.log('team: null')
+    // console.log('Error fetching team details:', teamError)
     return <div className="p-4 text-red-500">Error fetching team details. Could not load members.</div>;
   }
 
