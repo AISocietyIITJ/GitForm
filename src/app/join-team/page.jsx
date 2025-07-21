@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import JoinTeamForm from "@/components/Dashboard/JoinTeamForm";
-import { HeroHighlight } from "@/components/ui/hero-highlight";
+import { HeroHighlight } from "@/components/Ui/hero-highlight";
 
 export default async function JoinTeamPage() {
   const supabase = await createClient();

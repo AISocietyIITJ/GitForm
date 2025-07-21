@@ -1,6 +1,6 @@
 import Authform from "@/components/Login/Authform";
 import React from "react";
-import { HeroHighlight } from "@/components/ui/hero-highlight";
+import { HeroHighlight } from "@/components/Ui/hero-highlight";
 
 const Page = () => {
   return (
