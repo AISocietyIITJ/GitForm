@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { BackgroundGradientAnimation } from "@/components/Ui/background-gradient-animation";
 import  { HeroHighlight } from "@/components/Ui/hero-highlight";
 
 export default async function Home() {
