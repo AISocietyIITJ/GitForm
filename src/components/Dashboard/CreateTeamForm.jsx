@@ -106,11 +106,11 @@ const CreateTeamForm = () => {
       router.refresh();
 
     } catch (error) {
-      console.error("Error joining team:", err.message);
-      if (err.message.includes('profiles_roll_number_key')) {
+      console.error("Error joining team:", error.message);
+      if (error.message.includes('profiles_roll_number_key')) {
         setError("This roll number is already registered.");
       } else {
-        setError(`An error occurred: ${err.message}`);
+        setError(`An error occurred: ${error.message}`);
       }
     } finally {
       setLoading(false);
