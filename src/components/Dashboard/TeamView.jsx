@@ -72,97 +72,118 @@ export default function TeamView({ team, members, currentUserId }) {
   };
   // --- END NEW ---
 
-  return (
-    <div className="flex-grow flex items-center font-black justify-center bg-white px-4">
-      <div className="w-full max-w-2xl border border-gray-200 rounded-lg p-8">
-        <div className="flex justify-between items-start">
-          <div>
-            <h1 className="text-3xl font-bold">{team.team_name}</h1>
-            <p className="text-gray-500 mt-1">Welcome to your team dashboard.</p>
-          </div>
-          {isLeader && (
-            <button
-              onClick={handleDeleteTeam}
-              disabled={loading}
-              className="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-red-600 disabled:bg-gray-400"
-            >
-              {loading ? "Deleting..." : "Delete Team"}
-            </button>
-          )}
+ return (
+  <div className="flex-grow flex items-center justify-center bg-gray-50 px-4" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif' }}>
+    <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-xl p-8 shadow-lg">
+      {/* Header Section */}
+      <div className="flex justify-between items-start mb-8">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{team.team_name}</h1>
+          <p className="text-lg text-gray-600 mt-2 font-medium">Welcome to your team dashboard</p>
         </div>
+        {isLeader && (
+          <button
+            onClick={handleDeleteTeam}
+            disabled={loading}
+            className="bg-red-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-red-700 transition-colors shadow-sm disabled:bg-gray-400"
+          >
+            {loading ? "Deleting..." : "Delete Team"}
+          </button>
+        )}
+      </div>
 
-        <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-          <label className="text-sm font-medium text-gray-600">Team Join Code</label>
-          <div className="flex items-center justify-between mt-2">
-            <p className="text-2xl font-mono tracking-widest text-gray-800">
-              {team.join_code}
-            </p>
-            <button
-              onClick={handleCopyCode}
-              className="bg-black text-white px-3 py-1 rounded-md text-sm hover:bg-neutral-800"
-            >
-              {copySuccess || 'Copy'}
-            </button>
-          </div>
+      {/* Team Join Code Section */}
+      <div className="mb-8 p-6 bg-blue-50 border border-blue-100 rounded-xl">
+        <label className="text-sm font-semibold text-blue-800 uppercase tracking-wide">Team Join Code</label>
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-3xl font-mono font-bold tracking-widest text-blue-900 select-all">
+            {team.join_code}
+          </p>
+          <button
+            onClick={handleCopyCode}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
+          >
+            {copySuccess || 'Copy Code'}
+          </button>
         </div>
+      </div>
 
-        {error && <div className="mt-4 text-center text-red-600 bg-red-50 p-3 rounded-md">{error}</div>}
+      {/* Error Message */}
+      {error && (
+        <div className="mb-8 text-center text-red-700 bg-red-50 border border-red-200 p-4 rounded-lg font-medium">
+          {error}
+        </div>
+      )}
 
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Team Members ({members.length})</h2>
-          <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Roll Number</th>
-        <th>Role</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {members.map((member, index) => (
-        <tr key={member.id} className="hover">
-          <th>{index + 1}</th>
-          <td className="font-medium">{member.full_name || "No name set"}</td>
-          <td className="text-gray-500">{member.roll_number || 'No roll #'}</td>
-          <td>
-            {member.id === team.leader_id ? (
-              <span className="badge badge-primary text-xs font-bold">
-                LEADER
-              </span>
-            ) : (
-              <span className="badge badge-ghost text-xs">
-                MEMBER
-              </span>
-            )}
-          </td>
-          <td>
-            {member.id === team.leader_id ? (
-              <span className="text-xs text-gray-400">-</span>
-            ) : member.id === currentUserId ? (
-              // Show "Leave Team" button only to the current user if they are NOT the leader
-              <button
-                onClick={handleLeaveTeam}
-                disabled={loading}
-                className="btn btn-ghost btn-xs text-error hover:bg-error/10 disabled:text-gray-400"
-              >
-                Leave Team
-              </button>
-            ) : (
-              <span className="text-xs text-gray-400">-</span>
-            )}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+      {/* Team Members Section */}
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          Team Members 
+          <span className="text-lg font-medium text-gray-500 ml-2">({members.length}/4)</span>
+        </h2>
+        
+        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="text-left text-sm font-semibold text-gray-900 px-6 py-4">#</th>
+                <th className="text-left text-sm font-semibold text-gray-900 px-6 py-4">Name</th>
+                <th className="text-left text-sm font-semibold text-gray-900 px-6 py-4">Roll Number</th>
+                <th className="text-left text-sm font-semibold text-gray-900 px-6 py-4">Role</th>
+                <th className="text-left text-sm font-semibold text-gray-900 px-6 py-4">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {members.map((member, index) => (
+                <tr 
+                  key={member.id} 
+                  className="hover:bg-gray-50 transition-colors"
+                >
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="font-semibold text-gray-900 text-base">
+                      {member.full_name || "No name set"}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-600 uppercase tracking-wide">
+                    {member.roll_number || 'No roll #'}
+                  </td>
+                  <td className="px-6 py-4">
+                    {member.id === team.leader_id ? (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">
+                        👑 LEADER
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                        👤 MEMBER
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4">
+                    {member.id === team.leader_id ? (
+                      <span className="text-xs text-gray-400">—</span>
+                    ) : member.id === currentUserId ? (
+                      <button
+                        onClick={handleLeaveTeam}
+                        disabled={loading}
+                        className="text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 px-3 py-1 rounded-md transition-colors disabled:text-gray-400"
+                      >
+                        Leave Team
+                      </button>
+                    ) : (
+                      <span className="text-xs text-gray-400">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 }
