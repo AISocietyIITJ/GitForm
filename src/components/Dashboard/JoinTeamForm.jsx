@@ -46,10 +46,11 @@ export default function JoinTeamForm({ userId }) {
     setLoading(true);
 
     if (!await checkGitHubStar()) {
-      setError("You must star Pathway on GitHub to join a team.");
+      setError("You must star all required Pathway repositories on GitHub to join team.");
       setLoading(false);
       return;
     }
+
 
     try {
       const { error: profileError } = await supabase
@@ -161,16 +162,30 @@ export default function JoinTeamForm({ userId }) {
           className="checkbox checkbox-primary"
         />
         <label htmlFor="starred" className="text-sm text-gray-400">
-          I have starred{" "}
-          <Link
-            href="https://github.com/pathwaycom/pathway"
-            target="_blank"
-            className="text-blue-400 underline"
-          >
-            Pathway
-          </Link>{" "}
-          on GitHub
-        </label>
+        I have starred the following repositories:
+        <ul className="list-disc ml-5 mt-1 text-blue-400 underline">
+          <li>
+            <a href="https://github.com/pathwaycom/pathway" target="_blank" rel="noopener noreferrer">
+              pathwaycom/pathway
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/pathwaycom/llm-app" target="_blank" rel="noopener noreferrer">
+              pathwaycom/llm-app
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/pathwaycom/pathway-benchmarks" target="_blank" rel="noopener noreferrer">
+              pathwaycom/pathway-benchmarks
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/pathwaycom/cookiecutter-pathway" target="_blank" rel="noopener noreferrer">
+              pathwaycom/cookiecutter-pathway
+            </a>
+          </li>
+        </ul>
+      </label>
       </div>
 
       {/* Terms */}

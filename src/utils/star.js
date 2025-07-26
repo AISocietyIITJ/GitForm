@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 
-export default async function checkGitHubStar() {
+export default async function checkGitHubStar(githubRepos = ['pathwaycom/pathway', 'pathwaycom/llm-app',    "pathwaycom/pathway-benchmarks",
+    "pathwaycom/cookiecutter-pathway"]) {
   const supabase = createClient();
 
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
@@ -18,22 +19,26 @@ export default async function checkGitHubStar() {
   }
 
   try {
-    const response = await fetch('https://api.github.com/user/starred/pathwaycom/pathway', {
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
-    });
+    const checkStar = async (repo) => {
+      const response = await fetch('https://api.github.com/user/starred/'+repo, {
+        headers: {
+          Authorization: `token ${accessToken}`,
+        },
+      });
 
-    if (response.status === 204) {
-      return true;
-    } 
-    else if (response.status === 404) {
-      return false;
-    } 
-    else {
-      console.error(`GitHub API returned an unexpected status: ${response.status}`);
-      return false;
+      if (response.status === 204) {
+        return true;
+      } 
+      else if (response.status === 404) {
+        return false;
+      } 
+      else {
+        console.error(`GitHub API returned an unexpected status: ${response.status}`);
+        return false;
+      }
     }
+    const results = await Promise.all(githubRepos.map(checkStar));
+    return results.every(Boolean);
   } catch (error) {
     console.error("Failed to call the GitHub API:", error);
     return false;
