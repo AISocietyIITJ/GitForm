@@ -15,15 +15,24 @@ const supabase = await createClient();
     return redirect("/auth");
   }
 
-  const { data: teamMember } = await supabase
-    .from("team_members")
-    .select("team_id")
-    .eq("user_id", user.id)
+  const { data: settings } = await supabase
+    .from("app_settings")
+    .select("registrations_enabled")
     .single();
 
-  if (teamMember) {
-    redirect("/dashboard");
-    return;
+  const registrationsEnabled = settings?.registrations_enabled ?? true;
+
+  if (registrationsEnabled) {
+    const { data: teamMember } = await supabase
+      .from("team_members")
+      .select("team_id")
+      .eq("user_id", user.id)
+      .single();
+
+    if (teamMember) {
+      redirect("/dashboard");
+      return;
+    }
   }
 
   return (
@@ -34,8 +43,14 @@ const supabase = await createClient();
         containerClassName="flex-1 flex items-center justify-center"
         className="flex flex-col items-center justify-center px-4"
       >
-        <div className="w-full max-w-2xl lg:max-w-2xl bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl">          
-          <CreateTeamForm />
+        <div className="w-full max-w-2xl lg:max-w-2xl bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl">     
+        { registrationsEnabled ? ( <CreateTeamForm /> ) : (
+           <div className="text-center text-white">
+              <h1 className="text-2xl font-semibold mb-4">Registrations Closed</h1>
+              <p className="text-gray-300">We are not accepting new team registrations at this time.</p>
+            </div>
+        )}     
+          
         </div>
       </HeroHighlight>
     </div>
