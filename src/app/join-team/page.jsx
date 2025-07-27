@@ -34,17 +34,6 @@ export default async function JoinTeamPage() {
 
   const registrationsEnabled = settings?.registrations_enabled ?? true;
 
-  if (registrationsEnabled) {
-      const { data: teams, error: teamsError } = await supabase
-      .from("teams")
-      .select("id, team_name")
-      .order("team_name", { ascending: true });
-
-      if (teamsError) {
-        return <p className="p-4 text-red-500">Error loading teams.</p>;
-      }
-  }
-
   return (
     <div className="min-h-screen bg-black flex flex-col">
       <Navbar />
@@ -54,7 +43,7 @@ export default async function JoinTeamPage() {
             >
       <div className="w-full max-w-2xl lg:max-w-2xl bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl">  
       { registrationsEnabled ? (
-        <JoinTeamForm teams={teams} userId={user.id} />
+        <JoinTeamForm userId={user.id} />
       ) : (
         <div className="text-center text-white">
               <h1 className="text-2xl font-semibold mb-4">Registrations Closed</h1>
