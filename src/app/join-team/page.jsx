@@ -44,7 +44,6 @@ export default async function JoinTeamPage() {
         return <p className="p-4 text-red-500">Error loading teams.</p>;
       }
   }
-  
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
