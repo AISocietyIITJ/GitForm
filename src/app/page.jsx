@@ -25,8 +25,8 @@ export default async function Home() {
   return (
      <div className="min-h-screen bg-black">
       <HeroHighlight
-        containerClassName="h-screen lg:h-screen md:h-auto"
-        className="flex flex-col items-center justify-center space-y-6 lg:space-y-8 px-4"
+        containerClassName="w-full min-h-screen"
+        className="flex flex-col items-center justify-center space-y-6 lg:space-y-8 px-4 py-10"
       >
         {/* Main Hero Section */}
         <div className="text-center space-y-4 max-w-4xl mx-auto">

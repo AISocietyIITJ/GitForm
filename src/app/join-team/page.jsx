@@ -39,7 +39,7 @@ export default async function JoinTeamPage() {
       <Navbar />
       <HeroHighlight
               containerClassName="flex-1 flex items-center justify-center"
-              className="flex flex-col items-center justify-center px-4"
+              className="flex flex-col items-center justify-center px-4 py-10"
             >
       <div className="w-full max-w-2xl lg:max-w-2xl bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl">  
       { registrationsEnabled ? (
